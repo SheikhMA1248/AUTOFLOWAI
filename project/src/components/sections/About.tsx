@@ -10,7 +10,7 @@ const About: React.FC = () => {
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            About <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Autloflow AI</span>
+            About <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Autoflow AI</span>
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed">
             We're a team of AI specialists, engineers, and business strategists creating AI solutions that deliver real business value. Our approach combines cutting-edge technology with practical applications designed to transform how your business operates.
