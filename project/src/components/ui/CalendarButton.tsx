@@ -1,0 +1,31 @@
+import React, { ReactNode } from 'react';
+import { Calendar } from 'lucide-react';
+
+interface CalendarButtonProps {
+  text: string;
+  className?: string;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
+}
+
+export const CalendarButton: React.FC<CalendarButtonProps> = ({ 
+  text, 
+  className = "",
+  iconLeft = <Calendar size={18} className="mr-2" />,
+  iconRight
+}) => {
+  const handleClick = () => {
+    window.location.href = 'https://cal.com/sheikh-ahmad-b9aecf/30min';
+  };
+
+  return (
+    <button 
+      onClick={handleClick}
+      className={`flex items-center justify-center ${className}`}
+    >
+      {iconLeft}
+      {text}
+      {iconRight}
+    </button>
+  );
+};
