@@ -25,7 +25,7 @@ export const socialLinks = [
 
 // Company contact info
 export const contactInfo = {
-  email: 'hello@autloflow.ai',
+  email: 'hello@autoflow.ai',
   phone: '+1 (555) 123-4567',
   address: '123 AI Boulevard, San Francisco, CA 94105'
 };
