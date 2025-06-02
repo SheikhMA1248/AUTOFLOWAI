@@ -5,25 +5,28 @@ import BlogCard from '../ui/BlogCard';
 const Blog: React.FC = () => {
   const blogPosts = [
     {
-      title: "5 Ways AI Automation Is Transforming Financial Services",
-      excerpt: "Discover how AI-powered automation is revolutionizing processes, improving customer experiences, and reducing costs in the financial sector.",
+      title: "Trends in AI Transforming Financial Services in 2025: Is Your Organization Ready?",
+      excerpt: "Strategic adoption of artificial intelligence (AI) is unlocking immense opportunities for innovation and growth in financial services.",
       imageUrl: "https://images.pexels.com/photos/6693661/pexels-photo-6693661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       category: "Automation",
-      date: "May 15, 2025"
+      date: "January 23, 2025",
+      link: "https://enxoo.com/trends-in-ai-transforming-financial-services-in-2025-is-your-organization-ready/"
     },
     {
-      title: "The Future of Customer Service: AI Agents vs. Human Touch",
-      excerpt: "Exploring the perfect balance between AI efficiency and human empathy in creating exceptional customer service experiences.",
+      title: "AI vs. Human: The Future of Customer Interaction",
+      excerpt: "Exploring the evolving landscape of customer service and the perfect balance between AI efficiency and human touch.",
       imageUrl: "https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       category: "AI Agents",
-      date: "April 28, 2025"
+      date: "March 1, 2025",
+      link: "https://medium.com/@channelasaservice/ai-vs-human-the-future-of-customer-interaction-d7e108062cc9"
     },
     {
-      title: "Voice AI: Beyond Basic Commands to Natural Conversations",
-      excerpt: "How advances in natural language processing are creating voice interfaces that feel increasingly human-like and intuitive.",
+      title: "Voice agents and Conversational AI: new trends for developers in 2025",
+      excerpt: "Stay on top of the latest voice agents and Conversational AI trends shaping the future of human-computer interaction.",
       imageUrl: "https://images.pexels.com/photos/9034763/pexels-photo-9034763.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       category: "Voice Agents",
-      date: "April 10, 2025"
+      date: "March 3, 2025",
+      link: "https://elevenlabs.io/blog/voice-agents-and-conversational-ai-new-developer-trends-2025"
     }
   ];
 
@@ -48,18 +51,9 @@ const Blog: React.FC = () => {
               imageUrl={post.imageUrl}
               category={post.category}
               date={post.date}
+              link={post.link}
             />
           ))}
-        </div>
-        
-        <div className="text-center mt-12">
-          <a 
-            href="#" 
-            className="inline-flex items-center text-blue-500 hover:text-blue-700 font-medium transition-colors"
-          >
-            View all blog posts
-            <ArrowRight size={16} className="ml-2" />
-          </a>
         </div>
       </div>
     </section>

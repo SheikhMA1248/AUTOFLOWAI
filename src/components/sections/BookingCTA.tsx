@@ -1,84 +1,103 @@
 import React, { useEffect } from 'react';
-import { Calendar, ArrowRight } from 'lucide-react';
-
-// Define types for Cal.com
-interface CalFunction {
-  (action: string, ...args: any[]): void;
-  loaded?: boolean;
-  ns: Record<string, any>;
-  q: any[];
-}
-
-interface CalApi {
-  q: any[];
-  ns?: Record<string, any>;
-}
+import { Calendar } from 'lucide-react';
 
 declare global {
   interface Window {
-    Cal?: CalFunction;
+    Cal?: {
+      (action: string, ...args: any[]): void;
+      q?: any[];
+    };
   }
 }
 
 const BookingCTA: React.FC = () => {
   useEffect(() => {
     // Cal.com initialization script
-    (function (C: Window, A: string, L: string) { 
-      let p = function (a: CalApi, ar: any) { a.q.push(ar); }; 
-      let d = C.document; 
-      C.Cal = C.Cal || function (this: any, ...args: any[]) { 
-        let cal = C.Cal as CalFunction; 
-        let ar = args; 
-        if (!cal.loaded) { 
-          cal.ns = {}; 
-          cal.q = cal.q || []; 
-          d.head.appendChild(d.createElement("script")).src = A; 
-          cal.loaded = true; 
-        } 
-        if (ar[0] === L) { 
-          const api = Object.assign(function () { p(api, arguments); }, { q: [], ns: {} } as CalApi);
-          const namespace = ar[1] as string; 
-          if(namespace){
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ["initNamespace", namespace]);
-          } else p(cal, ar); 
-          return;
-        } 
-        p(cal, ar); 
-      } as CalFunction; 
-    })(window, "https://app.cal.com/embed/embed.js", "init");
+    (function (C: any, A: string, L: string) {
+      let p = function (a: any, ar: any) {
+        a.q.push(ar);
+      };
+      let d = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement('script')).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = { q: [], ns: {} };
+            cal.ns[ar[1]] = api;
+            p(api, ar);
+          } else {
+            p(cal, ar);
+          }
+        };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
 
-    // Initialize Cal
-    window.Cal?.("init", "30min", {origin:"https://cal.com"});
-
-    // Configure inline embedding
-    window.Cal?.ns["30min"]("inline", {
-      elementOrSelector:"#my-cal-inline",
-      config: {
-        "layout":"month_view",
-        "hideEventTypeDetails":false,
-        "theme": "dark",
-        "hideBranding": true
-      },
-      calLink: "sheikh-ahmad-b9aecf/30min",
-    });
-
-    // Configure UI settings
-    window.Cal?.ns["30min"]("ui", {
-      "styles": {
-        "body": {
-          "background": "transparent"
-        },
-        "branding": {
-          "display": "none"
+    // Initialize Cal with dark theme
+    window.Cal?.('init', {
+      origin: 'https://cal.com',
+      cssVarsPerTheme: {
+        dark: {
+          'cal-brand': '#ffffff',
+          '--cal-brand-emphasis': '#ffffff',
+          '--cal-brand-text': '#101010',
+          '--cal-brand-subtle': '#9CA3AF',
+          '--cal-bg': '#101010',
+          '--cal-bg-emphasis': '#222222',
+          '--cal-bg-subtle': '#2D2D2D',
+          '--cal-bg-muted': '#1C1C1C',
+          '--cal-default': '#ffffff',
+          '--cal-default-emphasis': '#ffffff',
+          '--cal-default-subtle': '#9CA3AF',
+          '--cal-default-muted': '#4B5563',
+          '--cal-inverted': '#000000',
+          '--cal-inverted-emphasis': '#101010',
+          '--cal-inverted-subtle': '#1C1C1C',
+          '--cal-inverted-muted': '#2D2D2D',
+          '--cal-shadow': 'rgba(0, 0, 0, 0.4)',
+          '--cal-shadow-emphasis': 'rgba(0, 0, 0, 0.6)',
+          '--cal-border-subtle': '#2D2D2D',
+          '--cal-border-emphasis': '#4B5563',
+          '--cal-border-muted': '#1C1C1C',
+          '--cal-border-default': '#2D2D2D'
         }
-      },
-      "cssVarsPerTheme":{
-        "light":{"cal-brand":"#192a6c"},
-        "dark":{"cal-brand":"#dbd4d4"}
       }
     });
+
+    // Configure inline embedding with dark theme
+    window.Cal?.('inline', {
+      elementOrSelector: '#my-cal-inline',
+      calLink: 'sheikh-ahmad-b9aecf/30min',
+      config: {
+        layout: window.innerWidth < 768 ? 'mobile' : 'month_view',
+        hideEventTypeDetails: false,
+        theme: 'dark',
+        hideBranding: true,
+        iframeAttrs: {
+          style: 'width: 100%; height: 100%; border: none; overflow-y: auto; -webkit-overflow-scrolling: touch;'
+        }
+      }
+    });
+
+    // Handle window resize
+    const handleResize = () => {
+      window.Cal?.('inline', {
+        elementOrSelector: '#my-cal-inline',
+        config: {
+          layout: window.innerWidth < 768 ? 'mobile' : 'month_view',
+          theme: 'dark'
+        }
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -100,39 +119,34 @@ const BookingCTA: React.FC = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 md:p-6 mb-8">
             <h3 className="text-xl font-semibold mb-6 flex items-center justify-center">
               <Calendar className="mr-2 h-5 w-5" />
               What to expect in your consultation
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-400 flex items-center justify-center text-blue-900 font-bold text-lg mr-4 mt-0.5">1</div>
-                <p className="text-lg">A discussion of your business challenges and objectives</p>
+                <p className="text-base md:text-lg">A discussion of your business challenges and objectives</p>
               </div>
               <div className="flex items-start">
                 <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-400 flex items-center justify-center text-blue-900 font-bold text-lg mr-4 mt-0.5">2</div>
-                <p className="text-lg">An overview of our AI capabilities and approach</p>
+                <p className="text-base md:text-lg">An overview of our AI capabilities and approach</p>
               </div>
               <div className="flex items-start">
                 <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-400 flex items-center justify-center text-blue-900 font-bold text-lg mr-4 mt-0.5">3</div>
-                <p className="text-lg">Initial recommendations tailored to your needs</p>
+                <p className="text-base md:text-lg">Initial recommendations tailored to your needs</p>
               </div>
               <div className="flex items-start">
                 <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-400 flex items-center justify-center text-blue-900 font-bold text-lg mr-4 mt-0.5">4</div>
-                <p className="text-lg">Next steps and implementation timeline</p>
+                <p className="text-base md:text-lg">Next steps and implementation timeline</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-xl">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-8 shadow-xl">
             <h3 className="text-2xl font-semibold mb-6 text-center">Book Your Meeting</h3>
-            <div id="my-cal-inline" style={{
-              width: '100%',
-              height: '600px',
-              borderRadius: '0.75rem',
-              overflow: 'hidden'
-            }}></div>
+            <div id="my-cal-inline" className="w-full min-h-[600px] md:h-[600px] rounded-xl overflow-hidden touch-manipulation"></div>
           </div>
         </div>
       </div>

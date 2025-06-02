@@ -1,7 +1,15 @@
 import React from 'react';
-import { CircuitBoard, Mail, Phone, Twitter, Linkedin, Github } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-8">
@@ -17,17 +25,6 @@ const Footer: React.FC = () => {
             <p className="text-gray-300 mb-4">
               Transform your workflow with AI automations, intelligent agents, and next-gen voice solutions.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
-                <Github size={20} />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -35,27 +32,47 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4 text-white">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#services" className="text-gray-300 hover:text-blue-400 transition-colors">
+                <a 
+                  href="#services" 
+                  onClick={(e) => handleSmoothScroll(e, 'services')}
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                >
                   Services
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="text-gray-300 hover:text-blue-400 transition-colors">
+                <a 
+                  href="#how-it-works" 
+                  onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                >
                   How It Works
                 </a>
               </li>
               <li>
-                <a href="#case-studies" className="text-gray-300 hover:text-blue-400 transition-colors">
+                <a 
+                  href="#case-studies" 
+                  onClick={(e) => handleSmoothScroll(e, 'case-studies')}
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                >
                   Case Studies
                 </a>
               </li>
               <li>
-                <a href="#blog" className="text-gray-300 hover:text-blue-400 transition-colors">
-                  Blog
+                <a 
+                  href="#blog" 
+                  onClick={(e) => handleSmoothScroll(e, 'blog')}
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                >
+                  Insights
                 </a>
               </li>
               <li>
-                <a href="#book-meeting" className="text-gray-300 hover:text-blue-400 transition-colors">
+                <a 
+                  href="#book-meeting" 
+                  onClick={(e) => handleSmoothScroll(e, 'book-meeting')}
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                >
                   Book a Meeting
                 </a>
               </li>
