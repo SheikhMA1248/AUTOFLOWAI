@@ -12,7 +12,7 @@ export const navLinks = [
   { name: 'Services', href: '#services' },
   { name: 'How It Works', href: '#how-it-works' },
   { name: 'Case Studies', href: '#case-studies' },
-  { name: 'Blog', href: '#blog' },
+  { name: 'Insights', href: '#blog' },
   { name: 'Book a Meeting', href: '#book-meeting', isButton: true }
 ];
 

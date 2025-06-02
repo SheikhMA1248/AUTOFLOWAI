@@ -8,6 +8,29 @@ const Navbar: React.FC = () => {
   const location = useLocation();
 
   const isHomePage = location.pathname === '/';
+  const isCaseStudiesPage = location.pathname === '/case-studies';
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsOpen(false);
+    }
+  };
+
+  const handleBookMeetingClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isCaseStudiesPage) {
+      window.location.href = '/#book-meeting';
+    } else {
+      const element = document.getElementById('book-meeting');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +47,13 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
+  const getTextColorClass = () => {
+    if (isCaseStudiesPage && !isScrolled) {
+      return 'text-white';
+    }
+    return 'text-gray-700';
+  };
+
   return (
     <nav 
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -36,7 +66,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           <RouterLink to="/" className="flex items-center">
             <img src="/AutoFlowAI-1.webp" alt="Autoflow AI" className="h-8 w-8" />
-            <span className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <span className={`ml-2 text-xl font-bold ${!isScrolled && isCaseStudiesPage ? 'text-white' : 'bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent'}`}>
               Autoflow AI
             </span>
           </RouterLink>
@@ -45,27 +75,47 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-8">
             {isHomePage ? (
               <>
-                <a href="#services" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">
+                <a 
+                  href="#services" 
+                  onClick={(e) => handleSmoothScroll(e, 'services')}
+                  className={`${getTextColorClass()} hover:text-blue-500 transition-colors font-medium`}
+                >
                   Services
                 </a>
-                <a href="#how-it-works" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">
+                <a 
+                  href="#how-it-works" 
+                  onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                  className={`${getTextColorClass()} hover:text-blue-500 transition-colors font-medium`}
+                >
                   How It Works
                 </a>
-                <RouterLink to="/case-studies" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">
+                <a 
+                  href="#case-studies" 
+                  onClick={(e) => handleSmoothScroll(e, 'case-studies')}
+                  className={`${getTextColorClass()} hover:text-blue-500 transition-colors font-medium`}
+                >
                   Case Studies
-                </RouterLink>
-                <a href="#blog" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">
+                </a>
+                <a 
+                  href="#blog" 
+                  onClick={(e) => handleSmoothScroll(e, 'blog')}
+                  className={`${getTextColorClass()} hover:text-blue-500 transition-colors font-medium`}
+                >
                   Insights
                 </a>
               </>
             ) : (
-              <RouterLink to="/" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">
+              <RouterLink 
+                to="/" 
+                className={`${getTextColorClass()} hover:text-blue-500 transition-colors font-medium`}
+              >
                 Back to Home
               </RouterLink>
             )}
             <a 
               href="#book-meeting" 
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition-all transform hover:scale-105 shadow-md"
+              onClick={handleBookMeetingClick}
+              className={`${!isScrolled && isCaseStudiesPage ? 'bg-white text-blue-500' : 'bg-blue-500 text-white'} hover:bg-blue-600 hover:text-white px-6 py-2 rounded-full transition-all transform hover:scale-105 shadow-md`}
             >
               Book a Meeting
             </a>
@@ -75,7 +125,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 focus:outline-none"
+              className={`${getTextColorClass()} focus:outline-none`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -90,29 +140,29 @@ const Navbar: React.FC = () => {
                 <>
                   <a 
                     href="#services" 
+                    onClick={(e) => handleSmoothScroll(e, 'services')}
                     className="text-gray-700 hover:text-blue-500 transition-colors font-medium"
-                    onClick={() => setIsOpen(false)}
                   >
                     Services
                   </a>
                   <a 
                     href="#how-it-works" 
+                    onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
                     className="text-gray-700 hover:text-blue-500 transition-colors font-medium"
-                    onClick={() => setIsOpen(false)}
                   >
                     How It Works
                   </a>
-                  <RouterLink 
-                    to="/case-studies" 
+                  <a 
+                    href="#case-studies" 
+                    onClick={(e) => handleSmoothScroll(e, 'case-studies')}
                     className="text-gray-700 hover:text-blue-500 transition-colors font-medium"
-                    onClick={() => setIsOpen(false)}
                   >
                     Case Studies
-                  </RouterLink>
+                  </a>
                   <a 
                     href="#blog" 
+                    onClick={(e) => handleSmoothScroll(e, 'blog')}
                     className="text-gray-700 hover:text-blue-500 transition-colors font-medium"
-                    onClick={() => setIsOpen(false)}
                   >
                     Insights
                   </a>
@@ -128,8 +178,8 @@ const Navbar: React.FC = () => {
               )}
               <a 
                 href="#book-meeting" 
+                onClick={handleBookMeetingClick}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full text-center transition-all shadow-md"
-                onClick={() => setIsOpen(false)}
               >
                 Book a Meeting
               </a>

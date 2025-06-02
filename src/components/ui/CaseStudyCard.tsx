@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 
 interface Stat {
   label: string;
@@ -44,7 +43,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
         <p className="text-gray-600 mb-6 flex-grow">{description}</p>
         
         {/* Stats */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-2 gap-4">
           {stats.map((stat, index) => (
             <div key={index} className="bg-gray-50 p-3 rounded-lg">
               <p className="text-sm text-gray-500">{stat.label}</p>
@@ -52,15 +51,6 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
             </div>
           ))}
         </div>
-        
-        {/* Link */}
-        <a 
-          href="#" 
-          className="inline-flex items-center text-blue-500 hover:text-blue-700 font-medium transition-colors mt-auto"
-        >
-          Read case study
-          <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
-        </a>
       </div>
     </div>
   );

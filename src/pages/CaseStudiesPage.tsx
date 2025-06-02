@@ -1,13 +1,16 @@
-import React from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { caseStudies } from '../data/caseStudies';
+import { useNavigate } from 'react-router-dom';
 
 const CaseStudiesPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(-1);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleBookMeeting = () => {
+    navigate('/#book-meeting');
   };
 
   return (
@@ -15,15 +18,6 @@ const CaseStudiesPage: React.FC = () => {
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 relative">
         <div className="container mx-auto px-4 md:px-8">
-          {/* Back Button */}
-          <button 
-            onClick={handleBack}
-            className="inline-flex items-center text-white hover:text-white/90 font-medium transition-colors absolute top-8 left-8"
-          >
-            <ArrowLeft size={20} className="mr-2" />
-            Back
-          </button>
-
           <h1 className="text-4xl md:text-6xl font-bold text-center mb-6 drop-shadow-lg">
             Case Studies
           </h1>

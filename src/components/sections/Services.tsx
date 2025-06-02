@@ -1,9 +1,15 @@
 import React from 'react';
 import { Bot, Workflow, Mic, Globe, Target } from 'lucide-react';
 import ServiceCard from '../ui/ServiceCard';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import '../../styles/animations.css';
 
 const Services: React.FC = () => {
-  const services = [
+  const headerRef = useScrollAnimation({ threshold: 0.1, rootMargin: '0px' });
+  const mainServicesRef = useScrollAnimation({ threshold: 0.1, rootMargin: '0px' });
+  const additionalServicesRef = useScrollAnimation({ threshold: 0.1, rootMargin: '0px' });
+
+  const mainServices = [
     {
       icon: <Workflow size={24} />,
       title: "AI Automations",
@@ -39,7 +45,10 @@ const Services: React.FC = () => {
         "Conversational AI",
         "Multilingual support"
       ]
-    },
+    }
+  ];
+
+  const additionalServices = [
     {
       icon: <Globe size={24} />,
       title: "Website Optimization",
@@ -77,7 +86,10 @@ const Services: React.FC = () => {
       <div className="absolute bottom-40 left-10 w-24 h-24 bg-blue-100 rounded-full opacity-30"></div>
       
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div 
+          ref={headerRef}
+          className="text-center max-w-3xl mx-auto mb-16 animate-on-scroll fade-in"
+        >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Our <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Services</span>
           </h2>
@@ -86,8 +98,29 @@ const Services: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+        {/* Main Services */}
+        <div 
+          ref={mainServicesRef}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 animate-on-scroll stagger"
+        >
+          {mainServices.map((service, index) => (
+            <ServiceCard 
+              key={index}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+              color={service.color}
+              features={service.features}
+            />
+          ))}
+        </div>
+
+        {/* Additional Services */}
+        <div 
+          ref={additionalServicesRef}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-on-scroll slide-in-bottom"
+        >
+          {additionalServices.map((service, index) => (
             <ServiceCard 
               key={index}
               icon={service.icon}

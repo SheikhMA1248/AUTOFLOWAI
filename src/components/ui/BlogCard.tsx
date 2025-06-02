@@ -7,9 +7,10 @@ interface BlogCardProps {
   imageUrl: string;
   category: string;
   date: string;
+  link: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ title, excerpt, imageUrl, category, date }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ title, excerpt, imageUrl, category, date, link }) => {
   // Define category color
   const getCategoryColor = () => {
     switch(category.toLowerCase()) {
@@ -49,7 +50,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ title, excerpt, imageUrl, category,
         
         {/* Link */}
         <a 
-          href="#" 
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center text-blue-500 hover:text-blue-700 font-medium transition-colors mt-auto"
         >
           Read more

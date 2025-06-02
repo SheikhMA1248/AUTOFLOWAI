@@ -15,7 +15,10 @@ export const CalendarButton: React.FC<CalendarButtonProps> = ({
   iconRight
 }) => {
   const handleClick = () => {
-    window.location.href = 'https://cal.com/sheikh-ahmad-b9aecf/30min';
+    const element = document.getElementById('book-meeting');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (

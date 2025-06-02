@@ -1,23 +1,34 @@
 import React from 'react';
 import { Shield, Brain, Sparkles } from 'lucide-react';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import '../../styles/animations.css';
 
 const About: React.FC = () => {
+  const headerRef = useScrollAnimation({ threshold: 0.1, rootMargin: '0px' });
+  const cardsRef = useScrollAnimation({ threshold: 0.1, rootMargin: '0px' });
+
   return (
     <section className="py-20 bg-cream relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-full h-20 bg-gradient-to-b from-white/50 to-transparent"></div>
       
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div 
+          ref={headerRef}
+          className="text-center max-w-3xl mx-auto mb-16 animate-on-scroll fade-in"
+        >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            About <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Autoflow AI</span>
+            Why Choose <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Autoflow AI</span>
           </h2>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            We're a team of AI specialists, engineers, and business strategists creating AI solutions that deliver real business value. Our approach combines cutting-edge technology with practical applications designed to transform how your business operates.
+          <p className="text-gray-600 text-lg">
+            We combine deep expertise in artificial intelligence with a relentless focus on delivering measurable business results.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div 
+          ref={cardsRef}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll stagger"
+        >
           {/* Value Proposition 1 */}
           <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
             <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-6">
