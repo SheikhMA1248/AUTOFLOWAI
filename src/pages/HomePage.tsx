@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import Services from './components/sections/Services';
-import HowItWorks from './components/sections/HowItWorks';
-import Metrics from './components/sections/Metrics';
-import Testimonials from './components/sections/Testimonials';
-import CaseStudies from './components/sections/CaseStudies';
-import BookingCTA from './components/sections/BookingCTA';
-import Blog from './components/sections/Blog';
+import Hero from '../components/sections/Hero';
+import About from '../components/sections/About';
+import Services from '../components/sections/Services';
+import HowItWorks from '../components/sections/HowItWorks';
+import Metrics from '../components/sections/Metrics';
+import Testimonials from '../components/sections/Testimonials';
+import CaseStudies from '../components/sections/CaseStudies';
+import BookingCTA from '../components/sections/BookingCTA';
+import Blog from '../components/sections/Blog';
 
-// Add required styles
-import './styles/animations.css';
-
-function App() {
+const HomePage: React.FC = () => {
   useEffect(() => {
     // Update document title
     document.title = "Autoflow AI - Smarter Business, Seamless Automation";
@@ -50,8 +45,7 @@ function App() {
   }, []);
 
   return (
-    <div className="font-sans">
-      <Navbar />
+    <main className="font-sans">
       <Hero />
       <About />
       <Services />
@@ -61,9 +55,8 @@ function App() {
       <CaseStudies />
       <BookingCTA />
       <Blog />
-      <Footer />
-    </div>
+    </main>
   );
-}
+};
 
-export default App;
+export default HomePage; 
