@@ -11,22 +11,22 @@ interface Testimonial {
 const Testimonials: React.FC = () => {
   const testimonials: Testimonial[] = [
     {
-      quote: "Autoflow AI's automation solution reduced our document processing time by 78% and virtually eliminated errors. Their team's expertise and support made the transition seamless.",
-      author: "Sarah Johnson",
-      position: "Operations Director",
-      company: "TechCorp Inc."
+      quote: "Autoflow AI’s automation solution dramatically streamlined our document processing. What used to be time-consuming and error-prone is now fast, accurate, and effortless. Their team guided us every step of the way, making the transition feel seamless and fully supported.",
+      author: "Abu Taher",
+      position: "CEO",
+      company: "HayeMedia"
     },
     {
-      quote: "The custom AI agent Autoflow AI built for our customer service team has been transformative. It handles 65% of inquiries automatically and provides our human agents with real-time assistance for complex cases.",
-      author: "Michael Chen",
+      quote: "Partnering with Autoflow AI completely changed the game for our customer service team. The custom AI agent they built now handles routine inquiries effortlessly and empowers our human agents with instant, intelligent support when things get complex. It’s like having an expert assistant working behind the scenes at all times.",
+      author: "David Stanley",
       position: "CTO",
       company: "Retail Innovations"
     },
     {
-      quote: "Implementing Autoflow AI's voice agents has revolutionized our call center operations. Our customers love the natural conversations, and we've seen a 42% increase in first-call resolution rates.",
-      author: "Emma Rodriguez",
-      position: "Customer Experience Lead",
-      company: "Global Services Ltd."
+      quote: "Since bringing in Autoflow AI, our day-to-day has completely changed. Tasks that used to take hours now just happen in the background, and our team can actually focus on the work that matters. It’s been a smooth transition, and honestly, we wouldn’t go back",
+      author: "Sophie Ellis",
+      position: "Head of Operations",
+      company: "SwiftPath Logistics"
     }
   ];
 
