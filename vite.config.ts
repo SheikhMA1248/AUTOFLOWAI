@@ -8,13 +8,14 @@ const __dirname = dirname(__filename);
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/AUTOFLOWAI/',
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
-    }
-  }
+      '@': resolve(__dirname, './src'),
+    },
+  },
 });
